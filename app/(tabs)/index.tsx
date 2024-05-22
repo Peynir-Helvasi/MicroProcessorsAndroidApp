@@ -4,26 +4,61 @@ import { Text, View } from "@/components/Themed";
 
 export default function TabOneScreen() {
   const [temperature, setTemperature] = useState(25);
-  const [humidity, setHumidity] = useState(34);
+  const [humidity, setHumidity] = useState(35);
 
   const increaseTemperature = () => {
-    setTemperature((prevTemperature) => prevTemperature + 1);
-    Alert.alert("Sicaklik Arttirildi", `Yeni sicaklik: ${temperature + 1}°C`);
+    setTemperature((prevTemperature) => {
+      if(prevTemperature < 35){
+        Alert.alert("Sicaklik Arttirildi", `Yeni sicaklik: ${temperature + 1}°C`);
+        return prevTemperature + 1 ;
+      }
+      else{
+        Alert.alert("Sicaklik Arttirilmadi", `Sicaklik 35 dereceyi gecemez`);
+        return prevTemperature;
+      }
+
+    });
+    
   };
 
   const decreaseTemperature = () => {
-    setTemperature((prevTemperature) => prevTemperature - 1);
+    setTemperature((prevTemperature) => {if(prevTemperature > -5){
+      Alert.alert("Sicaklik Arttirildi", `Yeni sicaklik: ${temperature - 1}°C`);
+      return prevTemperature - 1 ;
+    }
+      else{
+      Alert.alert("Sicaklik Arttirilmadi", `Sicaklik -5 dereceyi gecemez`);
+      return prevTemperature;
+      }
+  });
     Alert.alert("Sicaklik Azaltildi", `Yeni sicaklik: ${temperature - 1}°C`);
   };
 
   const increaseHumidity = () => {
-    setHumidity((prevHumidity) => prevHumidity + 1);
+    setHumidity((prevHumidity) => {
+      if(prevHumidity < 50){
+      Alert.alert("Nem Arttirildi", `Yeni Nem: ${humidity + 5}°C`);
+      return prevHumidity + 5 ;
+    }
+    else{
+      Alert.alert("Nem  Arttirilmadi", `Nem yüzde 50'yi gecemez`);
+      return prevHumidity;
+    }
+  });
     Alert.alert("Nem Arttirildi", `Yeni nem: ${humidity + 1}%`);
   };
 
   const decreaseHumidity = () => {
-    setHumidity((prevHumidity) => prevHumidity - 1);
-    Alert.alert("Nem Azaltildi", `Yeni nem: ${humidity - 1}%`);
+    setHumidity((prevHumidity) => {
+      if(prevHumidity > 0){
+      Alert.alert("Nem azaltıldı", `Yeni Nem: ${humidity - 5}°C`);
+      return prevHumidity - 5 ;
+    }
+    else{
+      Alert.alert("Nem  azaltılamadı", `Nem yüzde 0'yi gecemez`);
+      return prevHumidity;
+    }});
+    Alert.alert("Nem Azaltildi", `Yeni nem: ${humidity - 5}%`);
   };
 
   return (
@@ -116,10 +151,10 @@ const styles = StyleSheet.create({
   },
   temperatureText: {
     fontSize: 20,
-    marginBottom: 10,
+    
   },
   humidityText: {
     fontSize: 20,
-    marginBottom: 10,
+    
   },
 });
