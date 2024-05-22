@@ -5,8 +5,8 @@ import { Text, View } from "@/components/Themed";
 //const windowWidth = Dimensions.get("window").width;
 
 export default function TabOneScreen() {
-  const [temperature, setTemperature] = useState(25);
-  const [humidity, setHumidity] = useState(30);
+  const [temperature, setTemperature] = useState(0);
+  const [humidity, setHumidity] = useState(20);
 
 
   const increaseTemperature = () => {
@@ -39,8 +39,8 @@ export default function TabOneScreen() {
   const increaseHumidity = () => {
     setHumidity((prevHumidity) => {
       if(prevHumidity < 50){
-      Alert.alert("Nem Arttirildi", `Yeni Nem: ${humidity + 2}°C`);
-      return prevHumidity + 2 ;
+      Alert.alert("Nem Arttirildi", `Yeni Nem: ${humidity + 5}°C`);
+      return prevHumidity + 5 ;
     }
     else{
       Alert.alert("Nem  Arttirilmadi", `Nem yüzde 50'yi gecemez`);
@@ -52,8 +52,8 @@ export default function TabOneScreen() {
   const decreaseHumidity = () => {
     setHumidity((prevHumidity) => {
       if(prevHumidity > 0){
-      Alert.alert("Nem azaltildi", `Yeni Nem: ${humidity - 2}°C`);
-      return prevHumidity - 2 ;
+      Alert.alert("Nem azaltildi", `Yeni Nem: ${humidity - 5}°C`);
+      return prevHumidity - 5 ;
     }
     else{
       Alert.alert("Nem  azaltilamadi", `Nem yüzde 0'i gecemez`);
