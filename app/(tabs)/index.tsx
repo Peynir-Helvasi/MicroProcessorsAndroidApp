@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { StyleSheet, Image, TouchableOpacity, Alert, Dimensions } from "react-native";
 import { Text, View } from "@/components/Themed";
 
+//const windowWidth = Dimensions.get("window").width;
+
 export default function TabOneScreen() {
   const [temperature, setTemperature] = useState(25);
   const [humidity, setHumidity] = useState(35);
+
 
   const increaseTemperature = () => {
     setTemperature((prevTemperature) => {
@@ -18,12 +21,11 @@ export default function TabOneScreen() {
       }
 
     });
-    
+     
   };
 
   const decreaseTemperature = () => {
-    setTemperature((prevTemperature) => {if(prevTemperature > -5){
-      Alert.alert("Sicaklik Arttirildi", `Yeni sicaklik: ${temperature - 1}°C`);
+    setTemperature((prevTemperature) => {if(prevTemperature > -1){
       return prevTemperature - 1 ;
     }
       else{
@@ -37,35 +39,35 @@ export default function TabOneScreen() {
   const increaseHumidity = () => {
     setHumidity((prevHumidity) => {
       if(prevHumidity < 50){
-      Alert.alert("Nem Arttirildi", `Yeni Nem: ${humidity + 5}°C`);
-      return prevHumidity + 5 ;
+      Alert.alert("Nem Arttirildi", `Yeni Nem: ${humidity + 2}°C`);
+      return prevHumidity + 2 ;
     }
     else{
       Alert.alert("Nem  Arttirilmadi", `Nem yüzde 50'yi gecemez`);
       return prevHumidity;
     }
   });
-    Alert.alert("Nem Arttirildi", `Yeni nem: ${humidity + 1}%`);
   };
 
   const decreaseHumidity = () => {
     setHumidity((prevHumidity) => {
       if(prevHumidity > 0){
-      Alert.alert("Nem azaltıldı", `Yeni Nem: ${humidity - 5}°C`);
-      return prevHumidity - 5 ;
+      Alert.alert("Nem azaltildi", `Yeni Nem: ${humidity - 2}°C`);
+      return prevHumidity - 2 ;
     }
     else{
-      Alert.alert("Nem  azaltılamadı", `Nem yüzde 0'yi gecemez`);
+      Alert.alert("Nem  azaltilamadi", `Nem yüzde 0'i gecemez`);
       return prevHumidity;
     }});
-    Alert.alert("Nem Azaltildi", `Yeni nem: ${humidity - 5}%`);
   };
 
   return (
     <View style={styles.container}>
+    {/*  <Text style={styles.text}>Current Temperature: {currentTemperature} °C</Text>
+     <Text style={styles.text}>Current Humidity: {currentHumidity} %</Text> */}
       <Image style={styles.image} source={require("..//..//assets//images//images.jpg")} />
       <View style={styles.area}>
-        <Text style={[styles.text, styles.temperatureText]}>
+        <Text style={[styles.textTemperature, styles.temperatureText]}>
           Temperature: {temperature}°C
         </Text>
         <TouchableOpacity style={styles.button} onPress={increaseTemperature}>
@@ -80,17 +82,17 @@ export default function TabOneScreen() {
         </TouchableOpacity>
       </View>
       <View style={styles.area}>
-        <Text style={[styles.text, styles.humidityText]}>
+        <Text style={[styles.textHumidity, styles.humidityText]}>
           Humidity: {humidity}%
         </Text>
         <TouchableOpacity style={styles.button} onPress={increaseHumidity}>
           <View style={styles.buttonContent}>
-            <Text style={styles.buttonText}>+</Text>
+            <Text style={styles.buttonText}> + </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={decreaseHumidity}>
           <View style={styles.buttonContent}>
-            <Text style={styles.buttonText}>-</Text>
+            <Text style={styles.buttonText}> - </Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -104,6 +106,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  
   area: {
     backgroundColor:"transparent",
     flex: 1,
@@ -111,6 +114,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "80%",
   },
+
   image: {
     position: "absolute",
     top: 0,
@@ -121,40 +125,60 @@ const styles = StyleSheet.create({
     width: "100%",
     opacity: 0.4,
   },
+
   button: {
     borderColor: "black",
     borderWidth: 1,
     borderRadius: 5,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingHorizontal: 15,
+    paddingVertical: 1,
     marginTop: 15,
-    width: 100,
-    height: 50,
+    width: 80,
+    height: 40,
     justifyContent: "center",
     alignItems: "center",
+    alignSelf: "flex-start" //butonları sağa kaydırdık
   },
+
   buttonContent: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
     height: "100%",
     backgroundColor: "transparent",
   },
+
   buttonText: {
     color: "black",
     fontSize: 25,
   },
-  text: {
+
+  textTemperature: {
     color: "black",
-    fontSize: 25,
+    //fontSize: 15,
     fontWeight: "bold",
+    marginRight: 190,
   },
+
+  textHumidity: {
+    color: "black",
+    //fontSize: 15,
+    fontWeight: "bold",
+    marginRight: 215,
+  },
+
   temperatureText: {
-    fontSize: 20,
-    
+    fontSize: 20, 
   },
+
   humidityText: {
     fontSize: 20,
-    
   },
+
+  text: {
+    fontSize: 20,
+    fontWeight: "bold",
+    alignSelf:"flex-end",
+  }
 });
