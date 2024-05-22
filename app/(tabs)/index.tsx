@@ -6,7 +6,7 @@ import { Text, View } from "@/components/Themed";
 
 export default function TabOneScreen() {
   const [temperature, setTemperature] = useState(25);
-  const [humidity, setHumidity] = useState(35);
+  const [humidity, setHumidity] = useState(30);
 
 
   const increaseTemperature = () => {
