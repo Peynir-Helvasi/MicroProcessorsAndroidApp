@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Image, TouchableOpacity, Alert, Dimensions } from "react-native";
 import { Text, View } from "@/components/Themed";
 
+
 //const windowWidth = Dimensions.get("window").width;
 
 export default function TabOneScreen() {
@@ -61,13 +62,18 @@ export default function TabOneScreen() {
     }});
   };
 
+  const sendDataToArduino = () => {
+    
+  };
+  
+
   return (
     <View style={styles.container}>
     {/*  <Text style={styles.text}>Current Temperature: {currentTemperature} °C</Text>
      <Text style={styles.text}>Current Humidity: {currentHumidity} %</Text> */}
       <Image style={styles.image} source={require("..//..//assets//images//images.jpg")} />
       <View style={styles.area}>
-        <Text style={[styles.textTemperature, styles.temperatureText]}>
+        <Text style={[styles.textTemperature]}>
           Temperature: {temperature}°C
         </Text>
         <TouchableOpacity style={styles.button} onPress={increaseTemperature}>
@@ -82,7 +88,7 @@ export default function TabOneScreen() {
         </TouchableOpacity>
       </View>
       <View style={styles.area}>
-        <Text style={[styles.textHumidity, styles.humidityText]}>
+        <Text style={[styles.textHumidity]}>
           Humidity: {humidity}%
         </Text>
         <TouchableOpacity style={styles.button} onPress={increaseHumidity}>
@@ -96,6 +102,9 @@ export default function TabOneScreen() {
           </View>
         </TouchableOpacity>
       </View>
+      <TouchableOpacity  onPress={sendDataToArduino}>
+        <Text >Send Data to Arduino</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -130,14 +139,12 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 1,
     borderRadius: 5,
-    paddingHorizontal: 15,
-    paddingVertical: 1,
+    
     marginTop: 15,
     width: 80,
     height: 40,
     justifyContent: "center",
     alignItems: "center",
-    alignSelf: "flex-start" //butonları sağa kaydırdık
   },
 
   buttonContent: {
@@ -156,16 +163,14 @@ const styles = StyleSheet.create({
 
   textTemperature: {
     color: "black",
-    //fontSize: 15,
+    fontSize: 15,
     fontWeight: "bold",
-    marginRight: 190,
   },
 
   textHumidity: {
     color: "black",
-    //fontSize: 15,
+    fontSize: 15,
     fontWeight: "bold",
-    marginRight: 215,
   },
 
   temperatureText: {
@@ -178,7 +183,6 @@ const styles = StyleSheet.create({
 
   text: {
     fontSize: 20,
-    fontWeight: "bold",
-    alignSelf:"flex-end",
+    fontWeight: "bold", 
   }
 });
